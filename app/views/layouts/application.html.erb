@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WhartonShare</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'main'%>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-4851416663025412",
+      enable_page_level_ads: true
+      });
+    </script>
+  </head>
+
+  <body>
+
+  <div id ='main'>
+    <%= render(:partial => 'layouts/nav') %>
+
+  <div id = 'body'>
+    <%if !flash[:notice].blank? %>
+      <div class= 'alert alert-success'>
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <%= yield %>
+
+  </div>
+
+    <%= render(:partial => 'layouts/footer') %>
+
+  </div>
+
+  </body>
+</html>

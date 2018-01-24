@@ -1,0 +1,8 @@
+  S3_KEY: AKIAJ4BOEVZK4DMYT47A
+  S3_SECRET: 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
+  S3_REGION: us-east-1
+  S3_BUCKET_NAME: wharton-share-dev
+  S3_ASSET_URL: https://s3.amazonaws.com/
+  SENDMAIL_PASSWORD: June2015!
+  SENDMAIL_USERNAME: vadim.vishnepolsky@gmail.com
+  MAIL_HOST: localhost:3000

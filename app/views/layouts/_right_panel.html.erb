@@ -1,0 +1,15 @@
+<div class = 'col-md-3'>
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Recent Uploads
+      </h3>
+    </div>
+      <div class="panel-body">
+        <% @assets.first(5).each do |a| %>
+          <%= link_to("#{a.department.department_code}
+            #{a.course.course_code}- #{a.filename}", a.url.url) %> <br />
+        <% end %>
+      </div>
+  </div>
+</div>

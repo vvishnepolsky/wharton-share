@@ -1,0 +1,141 @@
+<div class ='container-fluid' >
+  <div class = 'row'>
+    <div class= 'col-md-1'>
+    </div>
+    <div class = 'col-md-10'>
+      <div class="page-header">
+        <h1>Dashboard <small><%= "#{@user.firstname} #{@user.lastname}"%></small></h1>
+      </div>
+    </div>
+    <div class= 'col-md-1'>
+    </div>
+  </div>
+    <div class = 'row'>
+      <div class = 'col-md-1'>
+      </div>
+      <div class = 'col-md-10'>
+        <!-- Subscriptions -->
+
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              My Subscriptions
+            </h3>
+          </div>
+          <div class="panel-body">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Course Name</th>
+                    <th scope ='col'>Number of Files</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <% @subscriptions.each do |s| %>
+                  <% @course = Course.find(s.course_id) %>
+                  <% @department = Department.find(@course.department_id) %>
+                  <tr>
+                    <td><%= link_to("#{@department.department_code} #{@course.course_code} - #{@course.course_description}", course_path(@course)) %>
+                    </td>
+                    <td><%= @course.assets.count %></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+          </div>
+        </div>
+
+
+        <!-- Requests -->
+
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              My Requests
+            </h3>
+          </div>
+          <div class="panel-body">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Course Name</th>
+                    <th scope='col'>Description</th>
+                    <th scope ='col'>Link</th>
+                    <th scope ='col'>Status</th>
+                    <th scope= "col">Completed By</th>
+                    <th scope= "col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <% @requests.each do |r| %>
+                  <% @course = Course.find(r.course_id) %>
+                  <% @department = Department.find(@course.department_id) %>
+                  <tr>
+
+                    <td><%="#{@department.department_code} #{@course.course_code} - #{@course.course_description}" %>
+                    <td><%="#{r.description}"%>
+
+                    <% if r.is_completed? %>
+                      <% @asset = Asset.find(r.asset_id) %>
+                      <td><%= link_to(@asset.filename, @asset.url.url) %></td>
+                    <% else %>
+                      <td></td>
+                    <% end %>
+
+                    <td><%= r.is_completed ? 'Completed' : 'Pending' %></td>
+                    <td><%= r.is_completed ? "#{r.user.firstname} #{r.user.lastname}" : 'Pending' %></td>
+                    <td>
+                      <% if !r.is_completed? %>
+                      <span class = 'action'><%= link_to(" ", request_path(r), method: :delete, :class => 'glyphicon glyphicon-remove text-danger',
+                       :data => {:confirm => 'Are you sure you want to delete this file?'}) %></span>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+              <small><%= link_to('New Request', new_request_path) %></small>
+          </div>
+        </div>
+
+
+
+        <!-- Uploads -->
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              My Uploads
+            </h3>
+          </div>
+          <div class="panel-body">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Filename</th>
+                    <th scope ='col'>Lecturer</th>
+                    <th scope="col">Term</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <% @assets.each do |a| %>
+                  <tr>
+                    <td><%= link_to(a.filename, a.url.url, :id => 'link', :user_id => current_user.id, :asset_id => a.id) %></td>
+                    <td><%= "#{a.lecturer.firstname} #{a.lecturer.lastname} " %></td>
+                    <td><%= a.term %></td>
+                    <td><%= a.year %></td>
+                      <td class = 'actions'>
+                       <span class = 'action'> <%= link_to(" ", edit_asset_path(a), :class => 'glyphicon glyphicon-pencil') %> </span>
+                       <span class = 'action'><%= link_to(" ", asset_path(a), method: :delete, :class => 'glyphicon glyphicon-remove text-danger',
+                        :data => {:confirm => 'Are you sure you want to delete this file?'}) %></span>
+                     </td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

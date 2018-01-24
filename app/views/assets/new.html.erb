@@ -1,0 +1,21 @@
+<div class ='container' >
+  <div class="page-header">
+    <h1>Upload New File</h1>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Upload Parameters
+        </h3>
+      </div>
+      <div class="panel-body">
+        <%= form_for(@asset, :html => {:multipart => true}) do |a| %>
+          <%= render(:partial => 'form', :locals => {:a => a}) %>
+          <div class="form-buttons">
+            <%= a.submit("Upload File", :class => 'btn btn-primary') %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

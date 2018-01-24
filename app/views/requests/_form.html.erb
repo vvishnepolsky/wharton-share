@@ -1,0 +1,18 @@
+
+
+<p>File Type</p>
+  <%= r.select(:file_type_id, @filetypes.map{|f| [f.file_type, f.id]}, {}, {:class => 'form-control'}) %> <br />
+
+<p>Select Department</p>
+  <%= select_tag("department", options_for_select(@departments.map{|d| [d.department_code, d.id]}), :class => 'form-control') %><br />
+
+<p>Course</p>
+    <%= r.select(:course_id, @courses.map{|c| [c.course_description, c.id]}, {}, {:class => 'form-control'}) %> <br />
+
+<p>Course Lecturer</p>
+    <%= r.select(:lecturer_id, @lecturers.map{|l| ["#{l.firstname} #{l.lastname}", l.id]}, {}, {:class => 'form-control'}) %><br />
+
+<p>Description</p>
+  <%= r.text_field(:description, :class =>'form-control') %> <br />
+
+  <%= r.hidden_field(:user_id, :value => current_user.id) %>

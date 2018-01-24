@@ -1,0 +1,70 @@
+<div class ='container-fluid' >
+  <div class = 'row'>
+    <div class= 'col-md-2'>
+    </div>
+    <div class = 'col-md-7'>
+      <div class="page-header">
+        <h1>All Courses</h1>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active">
+            <%= link_to('Courses', departments_path) %>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class ='col-md-3'>
+    </div>
+  </div>
+    <div class = 'row'>
+      <div class = 'col-md-2'>
+      </div>
+      <div class = 'col-md-7'>
+        <% @departments.each do |d| %>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <%= d.department_description %> (<%= d.department_code %>)
+            </h3>
+          </div>
+          <div class="panel-body">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Course Name</th>
+                  <th scope= 'col'>Action</th>
+                </tr>
+              </thread>
+            <tbody>
+            <% d.courses.each do |c| %>
+            <tr>
+              <td><%= link_to("#{c.display_full_code}-#{c.course_description}", course_path(c)) %></td>
+
+              <% if UserCourse.where(:course_id => c.id).where(:user_id => current_user.id).present? %>
+                  <td><%= link_to("Unsubscribe",
+                      {:controller => 'user_courses', :action => 'destroy', :id => UserCourse.where(:course_id => c.id).where(:user_id => current_user.id)[0].id},
+                        method: :delete, :class => 'btn btn-sm btn-danger') %>
+                  </td>
+                </td>
+              <% else %>
+                <td><%= link_to("Subscribe",
+                    {:controller => 'user_courses', :action => 'create',
+                      user_course: {:user_id => current_user.id, :course_id => c.id} },
+                    method: :post, :class => 'btn btn-sm btn-primary') %>
+                </td>
+              <% end %>
+            </tr>
+            <% end %>
+            </tbody>
+          </table>
+            <small><%= link_to("Add Course", new_course_by_department_course_path(d)) %></small>
+          </div>
+        </div>
+        <% end %>
+
+        <% if current_user.is_admin? %>
+          <small><%= link_to('Add New Department', new_department_path) %></small>
+        <% end %>
+      </div>
+        <%= render(:partial => 'layouts/right_panel') %>
+    </div>
+  </div>

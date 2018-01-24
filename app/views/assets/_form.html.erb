@@ -1,0 +1,36 @@
+
+
+<p>File Type</p>
+  <%= a.select(:file_type_id, @filetypes.map{|f| [f.file_type, f.id]}, :class => 'form-control') %> <br />
+
+  <% if (@action == 'edit') %>
+    <p>Select Department</p>
+      <%= select_tag("department", options_for_select(@departments.map{|d| [d.department_code, d.id]}), :class => 'form-control') %>
+  <% end %>
+
+<p>Course</p>
+  <%= a.select(:course_id, @courses.map{|c| [c.course_description, c.id]}, :class => 'form-control') %> <br />
+
+<p>Course Lecturer</p>
+  <%= a.select(:lecturer_id, @lecturers.map{|l| ["#{l.firstname} #{l.lastname}", l.id]}) %>
+
+<p>Term</p>
+  <%= a.select(:term, {'Autumn' => 'AU', 'Spring' =>'SP', 'Summer' => 'SU'}, :class => 'form-control') %> <br />
+
+<p>Year</p>
+  <%= a.select(:year, (2010..@current_year.to_i).to_a.reverse, :class => 'form-control') %> <br /><br />
+
+<% if (@action == 'new') %>
+  <p>Select File</p>
+    <%= a.file_field(:url , :class => 'form-control') %>
+<% else %>
+
+  <p>Filename</p>
+    <%= a.text_field(:filename, :class =>'form-control') %> <br />
+<%end %>
+    <%= a.hidden_field :user_id, :value => current_user.id %>
+
+<% if params[:request_id].present? %>
+  <p>Request ID</p>
+  <%= a.hidden_field :request_id, :value => params[:request_id] %>
+<% end %>

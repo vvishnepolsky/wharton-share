@@ -1,0 +1,21 @@
+<div class ='container' >
+  <div class="page-header">
+    <h1>Create New Class</h1>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Specify Class
+        </h3>
+      </div>
+      <div class="panel-body">
+        <%= form_for(@course) do |c| %>
+          <%= render(:partial => 'form', :locals => {:c => c}) %>
+          <div class="form-buttons">
+            <%= c.submit("Create Course", :class => 'btn btn-primary') %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

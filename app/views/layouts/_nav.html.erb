@@ -1,0 +1,23 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <%= link_to("WhartonShare", root_path, :class=>'navbar-brand') %><small id ='beta'>BETA</small>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">About</a></li>
+      <li><%= link_to("Courses", departments_path)%></li>
+      <% if user_signed_in? %>
+      <li><%= link_to("Dashboard", profile_path(current_user.id))%></li>
+      <li><%= link_to("Requests", requests_path)%></li>
+      <% end %>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+        <li><%= link_to("Welcome #{current_user.firstname} #{current_user.lastname}", profile_path(current_user.id) ) %> </li>
+        <li><%= link_to('', destroy_user_session_path, :class => 'glyphicon glyphicon-log-out', :method => :delete) %></li>
+      <% else %>
+        <li><%= link_to(' Login', new_user_session_path, :class => 'glyphicon glyphicon-log-in') %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

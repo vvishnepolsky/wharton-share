@@ -1,0 +1,50 @@
+<div class ='container-fluid' >
+  <div class = 'row'>
+    <div class= 'col-md-2'>
+    </div>
+    <div class = 'col-md-8'>
+      <div class="page-header">
+        <h1>Open Requests</h1>
+      </div>
+    </div>
+    <div class ='col-md-2'>
+    </div>
+  </div>
+    <div class = 'row'>
+      <div class = 'col-md-2'>
+      </div>
+      <div class = 'col-md-8'>
+        <% @requests.each do |r| %>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              Pending Requests
+            </h3>
+          </div>
+          <div class="panel-body">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Course Name</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Requested By</th>
+                  <th scope= 'col'>Action</th>
+                </tr>
+              </thread>
+            <tbody>
+            <tr>
+              <td><%= link_to("#{r.course.display_full_code}-#{r.course.course_description}", '#') %></td>
+              <td><%= r.description %> </td>
+              <td><%= "#{r.user.firstname} #{r.user.lastname}" %></td>
+              <td><%= link_to('Complete Request',
+                  {:controller => 'assets', :action => 'new', :request_id => r.id},
+                  :class => 'btn btn-primary btn-sm') %></td>
+            </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,10 @@
+
+
+<p>Department</p>
+  <%= c.select(:department_id, @departments.map{|d| [d.department_code, d.id]}, :class => 'form-control') %> <br />
+
+<p>Course Code</p>
+  <%= c.text_field(:course_code, :class => 'form-control') %><br  />
+
+<p>Course Description</p>
+  <%= c.text_field(:course_description , :class => 'form-control') %>

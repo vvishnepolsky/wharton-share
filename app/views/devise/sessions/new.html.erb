@@ -1,0 +1,34 @@
+<div class ='container' >
+  <div class="page-header">
+    <h1>Login</h1>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Login Credentials
+        </h3>
+      </div>
+      <div class="panel-body">
+
+        <%= form_for(resource, as: resource_name, url: new_user_session_path) do |f| %>
+          <%= devise_error_messages! %>
+
+          <p>Email</p>
+            <%= f.email_field(:email, :class => 'form-control') %> <br />
+
+          <p>Password</p>
+            <%= f.password_field(:password, :class => 'form-control') %> <br />
+
+          <%= f.check_box(:remember_me) %> <strong>Remember me</strong>
+
+          <div class="form-buttons">
+            <%= f.submit("Login", :class => 'btn btn-primary') %>
+          </div>
+
+          <%= render "devise/shared/links" %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

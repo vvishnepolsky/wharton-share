@@ -1,0 +1,21 @@
+<div class ='container' >
+  <div class="page-header">
+    <h1>Create New Request</h1>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Specify Request
+        </h3>
+      </div>
+      <div class="panel-body">
+        <%= form_for(@request, :html => {:multipart => true}) do |r| %>
+          <%= render(:partial => 'form', :locals => {:r => r}) %>
+          <div class="form-buttons">
+            <%= r.submit("Submit Request", :class => 'btn btn-primary') %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

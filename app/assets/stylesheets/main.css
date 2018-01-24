@@ -1,0 +1,46 @@
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+
+#main {
+   min-height:100%;
+   position:relative;
+   padding-bottom:60px;
+}
+
+#body {
+   padding:10px;
+   padding-bottom:60px;   /* Height of the footer */
+}
+
+
+footer {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  text-align: center;
+  background-color: #333333;
+  color: white;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.logout{
+  color: white;
+}
+
+.action{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#beta{
+  color: red;
+  font-style: italic;
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: -10px;
+}
