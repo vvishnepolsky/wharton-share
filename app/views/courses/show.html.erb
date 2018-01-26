@@ -11,6 +11,13 @@
       </li>
     </ol>
 
+    <div>
+      <%= link_to("Upload New File", {:controller => 'assets', :action => 'new', :course => @course.id, :department => @course.department_id},
+        :class => 'btn-lg btn-success' ) %>
+    </div>
+
+    <br  />
+
     <% @filetypes.each do |f| %>
     <div class="panel panel-primary">
       <div class="panel-heading">
