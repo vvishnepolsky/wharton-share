@@ -32,3 +32,7 @@ $(document).ready ->
       data: obj
       success: ->
         console.log 'Committed'
+
+$(document).ready ->
+  $("#link").on "click", ->
+    alert('Thank you for downloading please remember to upload files to keep the community growing')
